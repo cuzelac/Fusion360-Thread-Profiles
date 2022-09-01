@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ThreadType>
+  <Name> Manually Created Metric Threads</Name>
+  <CustomName> Manually Created Metric Threads</CustomName>
+  <Unit>mm</Unit>
+  <Angle>60.0</Angle>
+  <SortOrder>3</SortOrder>
+  <ThreadSize>
+    <!--For re-building the nut for Jennifer's car iphone mount-->
+    <Size>19</Size>
+    <Designation>
+      <ThreadDesignation>19x1.411</ThreadDesignation>
+      <CTD>19x1.411</CTD>
+      <Pitch>1.411</Pitch>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.0</Class>
+        <MajorDia>21</MajorDia>
+        <PitchDia>20.1</PitchDia>
+        <MinorDia>19</MinorDia>
+        <TapDrill>19</TapDrill>
+      </Thread>
+      <!--<Thread>-->
+        <!--<Gender>external</Gender>-->
+        <!--<Class>O.0</Class>-->
+        <!--<MajorDia>7.75</MajorDia>-->
+        <!--<PitchDia>5.8</PitchDia>-->
+        <!--<MinorDia>4.2</MinorDia>-->
+      <!--</Thread>-->
+    </Designation>
+  </ThreadSize>
+</ThreadType>
