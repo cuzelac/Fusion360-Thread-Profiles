@@ -31,4 +31,21 @@
       <!--</Thread>-->
     </Designation>
   </ThreadSize>
+  <!--For the nut on Jennifer's lyres-->
+  <ThreadSize>
+    <Size>4</Size>
+    <Designation>
+      <ThreadDesignation>4x0.8</ThreadDesignation>
+      <CTD>4x0.8</CTD>
+      <Pitch>0.8</Pitch>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.0</Class>
+        <MajorDia>4</MajorDia>
+        <PitchDia>3.5</PitchDia>
+        <MinorDia>3</MinorDia>
+        <TapDrill>3</TapDrill>
+      </Thread>
+    </Designation>
+  </ThreadSize>
 </ThreadType>
