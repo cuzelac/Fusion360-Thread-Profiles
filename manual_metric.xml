@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!--Thread info: https://www.mwcomponents.com/basic-screw-and-thread-terms-->
-<!--Pitch calculator for internal metric threads: https://www.calculatoratoz.com/en/pitch-diameter-of-internal-thread-given-pitch-calculator/Calc-15713-->
+<!--Thread info: https://www.mwcomponents.com/basic-screw-and-thread-terms -->
+<!--Pitch calculator for internal metric threads: https://www.calculatoratoz.com/en/pitch-diameter-of-internal-thread-given-pitch-calculator/Calc-15713 -->
 <ThreadType>
   <Name> Manually Created Metric Threads</Name>
   <CustomName> Manually Created Metric Threads</CustomName>
@@ -41,10 +41,26 @@
       <Thread>
         <Gender>internal</Gender>
         <Class>O.0</Class>
-        <MajorDia>4</MajorDia>
-        <PitchDia>3.5</PitchDia>
-        <MinorDia>3</MinorDia>
-        <TapDrill>3</TapDrill>
+        <MajorDia>4.5</MajorDia>
+        <PitchDia>3.98</PitchDia>
+        <MinorDia>3.63</MinorDia>
+        <TapDrill>3.63</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.1</Class>
+        <MajorDia>4.6</MajorDia>
+        <PitchDia>4.08</PitchDia>
+        <MinorDia>3.73</MinorDia>
+        <TapDrill>3.73</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.2</Class>
+        <MajorDia>4.7</MajorDia>
+        <PitchDia>4.18</PitchDia>
+        <MinorDia>3.83</MinorDia>
+        <TapDrill>3.83</TapDrill>
       </Thread>
     </Designation>
   </ThreadSize>
