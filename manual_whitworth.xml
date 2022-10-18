@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--Thread info: https://www.mwcomponents.com/basic-screw-and-thread-terms -->
+<!--Pitch calculator for internal metric threads: https://www.calculatoratoz.com/en/pitch-diameter-of-internal-thread-given-pitch-calculator/Calc-15713 -->
+<ThreadType>
+  <Name> Manually Created Metric Threads</Name>
+  <CustomName> Manually Created Metric Threads</CustomName>
+  <Unit>mm</Unit>
+  <Angle>55.0</Angle>
+  <SortOrder>3</SortOrder>
+  <ThreadSize>
+    <!-- nut to plug shower leak -->
+    <Size>20.75</Size>
+    <Designation>
+      <ThreadDesignation>20.75x1.814</ThreadDesignation>
+      <CTD>20.75x1.814</CTD>
+      <Pitch>1.814</Pitch>
+      <Thread>
+        <Gender>external</Gender>
+        <Class>O.0</Class>
+        <MajorDia>20.75</MajorDia>
+        <PitchDia>19.5709</PitchDia>
+        <MinorDia>18.52422</MinorDia>
+  </ThreadSize>
+</ThreadType>
