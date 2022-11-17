@@ -22,12 +22,12 @@
     * nuts are 'internal'
 * Given the pitch and major diameter, calculate the minor & pitch diameter
     * Helpful reminder of terms: https://www.mwcomponents.com/basic-screw-and-thread-terms
+    * Internal Threads (nuts)
+        * Measure minor diameter with calipers
+        * Calculate major diameter: https://www.calculatoratoz.com/en/major-diameter-of-internal-thread-given-pitch-and-minor-diameter-of-internal-thread-calculator/Calc-15809
+        * Calculate pitch diameter: https://www.calculatoratoz.com/en/pitch-diameter-of-internal-thread-given-pitch-calculator/Calc-15713
+        * Note that for internal threads, the TapDrill should be equal to the MinorDia
     * External Threads (screws)
         * Measure major diameter with calipers
         * Calculate pitch diameter: https://www.calculatoratoz.com/en/pitch-diameter-of-external-thread-given-pitch-calculator/Calc-15728
         * Calculate minor diameter: https://www.calculatoratoz.com/en/minor-diameter-of-external-thread-given-pitch-and-major-diameter-of-internal-thread-calculator/Calc-15811
-    * Internal Threads (nuts)
-        * Measure minor diameter with calipers
-        * Calculate major diameter: https://www.calculatoratoz.com/en/major-diameter-of-internal-thread-given-pitch-and-minor-diameter-of-external-thread-calculator/Calc-15815
-        * Calculate pitch diameter: https://www.calculatoratoz.com/en/pitch-diameter-of-internal-thread-given-pitch-calculator/Calc-15713
-        * Note that for internal threads, the TapDrill should be equal to the MinorDia
