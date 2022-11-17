@@ -1,0 +1,19 @@
+﻿offset = .1
+
+pitch = 0.977
+
+#internal threads
+
+minor_diameter = 9.45
+
+major_diameter = (1.083 * pitch) + (minor_diameter + offset) => 10.61
+
+pitch_diameter = major_diameter - (0.650 * pitch) => 9.97
+
+#external threads
+
+major_diameter = 10.51
+
+pitch_diameter = (major_diameter - offset) - (0.650 * pitch) => 9.77
+
+minor diameter = (major_diameter - offset) - (1.227 * pitch) => 9.21
