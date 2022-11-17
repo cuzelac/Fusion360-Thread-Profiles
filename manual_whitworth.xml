@@ -20,6 +20,8 @@
         <MajorDia>20.75</MajorDia>
         <PitchDia>19.5709</PitchDia>
         <MinorDia>18.52422</MinorDia>
+      </Thread>
+    </Designation>
   </ThreadSize>
   <ThreadSize>
     <!-- George's lamp nut -->
@@ -35,5 +37,28 @@
         <PitchDia>10.014</PitchDia>
         <MinorDia>9.45</MinorDia>
         <TapDrill>9.45</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>external</Gender>
+        <Class>O.0</Class>
+        <MajorDia>10.649</MajorDia>
+        <PitchDia>10.014</PitchDia>
+        <MinorDia>9.45</MinorDia>
+      </Thread>
+      <Thread>
+        <Gender>external</Gender>
+        <Class>O.1</Class>
+        <MajorDia>10.549</MajorDia>
+        <PitchDia>9.914</PitchDia>
+        <MinorDia>9.350</MinorDia>
+      </Thread>
+      <Thread>
+        <Gender>external</Gender>
+        <Class>O.2</Class>
+        <MajorDia>10.449</MajorDia>
+        <PitchDia>9.814</PitchDia>
+        <MinorDia>9.250</MinorDia>
+      </Thread>
+    </Designation>
   </ThreadSize>
 </ThreadType>
