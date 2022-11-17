@@ -2,8 +2,8 @@
 
 ## Using the thread gauge
 
-My thread gauge: https://smile.amazon.com/gp/product/B071H8GP18/
-Discussion on using that gauge: https://www.model-engineer.co.uk/forums/postings.asp?th=57757
+* My thread gauge: https://smile.amazon.com/gp/product/B071H8GP18/ 
+* Discussion on using that gauge: https://www.model-engineer.co.uk/forums/postings.asp?th=57757
 
 * Measurements with "G"
     * 13G means "13 gang" aka 13 TPI
