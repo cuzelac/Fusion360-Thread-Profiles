@@ -35,8 +35,16 @@
         <Class>O.0</Class>
         <MajorDia>10.51</MajorDia>
         <PitchDia>9.87</PitchDia>
-        <MinorDia>9.45</MinorDia>
-        <TapDrill>9.45</TapDrill>
+        <MinorDia>9.31</MinorDia>
+        <TapDrill>9.31</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.1</Class>
+        <MajorDia>10.61</MajorDia>
+        <PitchDia>9.77</PitchDia>
+        <MinorDia>9.21</MinorDia>
+        <TapDrill>9.21</TapDrill>
       </Thread>
       <Thread>
         <Gender>external</Gender>
