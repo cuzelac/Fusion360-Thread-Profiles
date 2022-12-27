@@ -40,7 +40,8 @@ What do the markings mean?
 
 * Thread angle applies to a whole .xml file
 * Convert TPI to pitch in mm
-    * https://www.newmantools.com/tech/pitchconversions.htm
+    * `25.4 * 1/TPI = pitch in mm`
+    * You can find a table of common values here: https://www.newmantools.com/tech/pitchconversions.htm
 * What's the gender of the thread?
     * Screws are 'external'
     * nuts are 'internal'
