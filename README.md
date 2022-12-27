@@ -31,7 +31,7 @@ What do the markings mean?
 * Measurements with "G"
     * 13G means "13 gang" aka 13 TPI
     * 14G 7/16 means 13 TPI for a 7/16" thread
-* No units means TPI
+* No units means pitch in mm
 * Note the angle of the thread
     * Whitworth is 55-deg
     * Metric is 60-deg
@@ -39,7 +39,7 @@ What do the markings mean?
 ## Figuring out parameters
 
 * Thread angle applies to a whole .xml file
-* Convert TPI to pitch in mm
+* If you have TPI, convert it to pitch in mm
     * `25.4 * 1/TPI = pitch in mm`
     * You can find a table of common values here: https://www.newmantools.com/tech/pitchconversions.htm
 * What's the gender of the thread?
