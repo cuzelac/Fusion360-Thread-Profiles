@@ -15,23 +15,48 @@ class Fusion360
         MM_PER_INCH = 25.4
         ALLOWED_GENDERS = [:external, :internal]
 
-        attr_accessor :pitch
-        attr_reader :gender
-        attr_reader :diameter
+        attr_accessor :pitch, :diameter
+        attr_reader :gender, :offsets, :significant_digits
 
-        # TODO: needs to support initialization with pitch OR tpi
-        def initialize(tpi, gender, diameter)
-            @gender = gender
-            @pitch = tpi_to_pitch(tpi)
-            @diameter = diameter
-             
-            validate!
+        def self.with_tpi(tpi, gender, diameter, opts = {})
+            calc = new(gender, diameter, opts)
+            calc.pitch = calc.tpi_to_pitch(tpi)
+            return calc
         end
 
-        def validate!
-            if !ALLOWED_GENDERS.include?(@gender)
+        def self.with_pitch(pitch, gender, diameter, opts = {})
+            calc = new(gender, diameter, opts)
+            calc.pitch = pitch
+            return calc
+        end
+
+        # do not use directly - use a class constructor method
+        def initialize(gender, diameter, opts)
+            self.gender = gender
+            @diameter = diameter
+            @significant_digits = opts.fetch(:significant_digits, 2)
+            @offsets = [0.0]
+        end
+        private_class_method :new
+
+        def add_offset(offset)
+            @offsets.push(offset)
+        end
+
+        def valid?
+            return false unless @pitch.is_a?(Numeric)
+            return false unless @diameter.is_a?(Numeric)
+            return false unless @significant_digits.is_a?(Integer)
+            return false unless ALLOWED_GENDERS.include?(@gender)
+            return true
+        end
+
+        def gender=(gender)
+            if !ALLOWED_GENDERS.include?(gender)
                 raise GenderError.new("gender must be one of #{ALLOWED_GENDERS.map &:to_s}")
             end
+
+            @gender = gender
         end
 
         # TODO: useless until we're rounding to 2 units of precision
@@ -40,7 +65,6 @@ class Fusion360
         end
 
         # TODO: Split to testable subroutines, perhaps in subclasses per gender?
-        # TODO: Should probably round to 2 units of precision
         def calculate_values_with_offset(offset = 0)
             values = {}
             values[:pitch] = @pitch
@@ -48,20 +72,45 @@ class Fusion360
             case @gender
             when :internal
                 values[:minor_dia] = diameter + offset
-                values[:major_dia] = (1.083 * values[:pitch]) + values[:minor_dia]
-                values[:pitch_dia] = values[:major_dia] - (0.650 * values[:pitch])
+                values[:major_dia] = internal_major_diameter(offset)
+                values[:pitch_dia] = internal_pitch_diameter(offset)
                 values[:tap_drill] = values[:minor_dia]
-            when :external 
+            when :external # NB: external is untested as of 12/27/22
                 values[:major_dia] = diameter - offset
-                values[:pitch_dia] = values[:major_dia] - (0.650 * values[:pitch])
-                values[:minor_dia] = values[:major_dia] - (1.227 * values[:pitch])
+                values[:pitch_dia] = external_pitch_diameter(offset)
+                values[:minor_dia] = external_minor_diameter(offset)
             end
 
             return values
         end
 
+        def internal_major_diameter(offset = 0)
+            minor_diameter = @diameter + offset
+            result = 1.083 * @pitch + minor_diameter
+            return result.round(@significant_digits)
+        end
+
+        def internal_pitch_diameter(offset = 0)
+            major_diameter = internal_major_diameter(offset)
+            result =  major_diameter - (0.650 * @pitch)
+            return result.round(@significant_digits)
+        end
+
+        def external_pitch_diameter(offset = 0)
+            major_diameter = @diameter - offset
+            result = major_diameter - (0.650 * @pitch)
+            return result.round(@significant_digits)
+        end
+
+        def external_minor_diameter(offset = 0)
+            major_diameter = @diameter - offset
+            result = major_diameter - (1.227 * @pitch)
+            return result.round(@significant_digits)
+        end
+
         def tpi_to_pitch(tpi)
-            return MM_PER_INCH * 1/tpi
+            result = MM_PER_INCH * 1/tpi
+            return result.round(@significant_digits)
         end
     end
 end
@@ -113,7 +162,8 @@ if __FILE__ == $PROGRAM_NAME
     $logger.debug(input)
 
 #    t = Fusion360::ThreadCalculator.new(input[:tpi], input[:gender], input[:diameter])
-    t = Fusion360::ThreadCalculator.new(1, input[:gender], input[:diameter])
+#    t = Fusion360::ThreadCalculator.new(1, input[:gender], input[:diameter])
+    t = Fusion360::ThreadCalculator.with_pitch(input[:pitch], input[:gender], input[:diameter])
     # manually set pitch because constructor only takes tpi
     t.pitch = input[:pitch]
 
