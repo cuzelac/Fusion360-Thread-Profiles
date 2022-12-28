@@ -68,45 +68,63 @@
     <!-- George's lamp nut -->
     <Size>9.45</Size>
     <Designation>
-      <ThreadDesignation>9.45x0.977</ThreadDesignation>
-      <CTD>9.45x0.977</CTD>
-      <Pitch>0.977</Pitch>
+      <ThreadDesignation>9.45x0.9</ThreadDesignation>
+      <CTD>9.45x0.9</CTD>
+      <Pitch>0.9</Pitch>
       <Thread>
         <Gender>internal</Gender>
         <Class>O.0</Class>
-        <MajorDia>10.51</MajorDia>
-        <PitchDia>9.87</PitchDia>
-        <MinorDia>9.31</MinorDia>
-        <TapDrill>9.31</TapDrill>
+        <MajorDia>10.42</MajorDia>
+        <PitchDia>9.84</PitchDia>
+        <MinorDia>9.45</MinorDia>
+        <TapDrill>9.45</TapDrill>
+      </Thread>
+
+    </Designation>
+
+    <Designation>
+      <ThreadDesignation>9.45x0.85</ThreadDesignation>
+      <CTD>9.45x0.85</CTD>
+      <Pitch>0.85</Pitch>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.0</Class>
+        <MajorDia>10.37</MajorDia>
+        <PitchDia>9.82</PitchDia>
+        <MinorDia>9.45</MinorDia>
+        <TapDrill>9.45</TapDrill>
       </Thread>
       <Thread>
         <Gender>internal</Gender>
         <Class>O.1</Class>
-        <MajorDia>10.61</MajorDia>
-        <PitchDia>9.77</PitchDia>
-        <MinorDia>9.21</MinorDia>
-        <TapDrill>9.21</TapDrill>
+        <MajorDia>10.47</MajorDia>
+        <PitchDia>9.92</PitchDia>
+        <MinorDia>9.55</MinorDia>
+        <TapDrill>9.55</TapDrill>
       </Thread>
       <Thread>
-        <Gender>external</Gender>
-        <Class>O.0</Class>
-        <MajorDia>10.51</MajorDia>
-        <PitchDia>9.87</PitchDia>
-        <MinorDia>9.31</MinorDia>
-      </Thread>
-      <Thread>
-        <Gender>external</Gender>
-        <Class>O.1</Class>
-        <MajorDia>10.41</MajorDia>
-        <PitchDia>9.77</PitchDia>
-        <MinorDia>9.21</MinorDia>
-      </Thread>
-      <Thread>
-        <Gender>external</Gender>
+        <Gender>internal</Gender>
         <Class>O.2</Class>
-        <MajorDia>10.31</MajorDia>
-        <PitchDia>9.67</PitchDia>
-        <MinorDia>9.11</MinorDia>
+        <MajorDia>10.57</MajorDia>
+        <PitchDia>10.02</PitchDia>
+        <MinorDia>9.65</MinorDia>
+        <TapDrill>9.65</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.3</Class>
+        <MajorDia>10.67</MajorDia>
+        <PitchDia>10.12</PitchDia>
+        <MinorDia>9.75</MinorDia>
+        <TapDrill>9.75</TapDrill>
+      </Thread>
+    <Thread>
+        <Gender>internal</Gender>
+        <Class>O.4</Class>
+        <MajorDia>10.77</MajorDia>
+        <PitchDia>10.22</PitchDia>
+        <MinorDia>9.85</MinorDia>
+        <TapDrill>9.85</TapDrill>
       </Thread>
     </Designation>
   </ThreadSize>
