@@ -7,6 +7,7 @@ $logger.level = Logger::DEBUG
 
 # This is very preliminary and I don't recommend anybody use it yet
 
+# TODO: good xml output
 class Fusion360
     class ThreadCalculator
         class GenderError < StandardError
@@ -30,7 +31,8 @@ class Fusion360
             return calc
         end
 
-        # do not use directly - use a class constructor method
+        # do not use directly - use a class constructor method like
+        # .with_tpi or .with_pitch instead
         def initialize(gender, diameter, opts)
             self.gender = gender
             @diameter = diameter
@@ -59,12 +61,10 @@ class Fusion360
             @gender = gender
         end
 
-        # TODO: useless until we're rounding to 2 units of precision
         def thread_designation
             return "#{@diameter}x#{@pitch}"
         end
 
-        # TODO: Split to testable subroutines, perhaps in subclasses per gender?
         def calculate_values_with_offset(offset = 0)
             values = {}
             values[:pitch] = @pitch
@@ -75,7 +75,7 @@ class Fusion360
                 values[:major_dia] = internal_major_diameter(offset)
                 values[:pitch_dia] = internal_pitch_diameter(offset)
                 values[:tap_drill] = values[:minor_dia]
-            when :external # NB: external is untested as of 12/27/22
+            when :external
                 values[:major_dia] = diameter - offset
                 values[:pitch_dia] = external_pitch_diameter(offset)
                 values[:minor_dia] = external_minor_diameter(offset)
@@ -149,7 +149,6 @@ if __FILE__ == $PROGRAM_NAME
 
 #    print "tpi: "
 #    input[:tpi] = gets.chomp.to_f
-    # doesn't support tpi vs pitch in mm :(
     print "pitch in mm: "
     input[:pitch] = gets.chomp.to_f
 
@@ -161,8 +160,7 @@ if __FILE__ == $PROGRAM_NAME
 
     $logger.debug(input)
 
-#    t = Fusion360::ThreadCalculator.new(input[:tpi], input[:gender], input[:diameter])
-#    t = Fusion360::ThreadCalculator.new(1, input[:gender], input[:diameter])
+#    t = Fusion360::ThreadCalculator.with_tpi(input[:tpi], input[:gender], input[:diameter])
     t = Fusion360::ThreadCalculator.with_pitch(input[:pitch], input[:gender], input[:diameter])
     # manually set pitch because constructor only takes tpi
     t.pitch = input[:pitch]
