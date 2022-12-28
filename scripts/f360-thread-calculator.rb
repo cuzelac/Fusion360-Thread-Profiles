@@ -71,12 +71,12 @@ class Fusion360
             values[:gender] = @gender
             case @gender
             when :internal
-                values[:minor_dia] = diameter + offset
+                values[:minor_dia] = (diameter + offset).round(@significant_digits)
                 values[:major_dia] = internal_major_diameter(offset)
                 values[:pitch_dia] = internal_pitch_diameter(offset)
                 values[:tap_drill] = values[:minor_dia]
             when :external
-                values[:major_dia] = diameter - offset
+                values[:major_dia] = (diameter - offset).round(@significant_digits)
                 values[:pitch_dia] = external_pitch_diameter(offset)
                 values[:minor_dia] = external_minor_diameter(offset)
             end
@@ -144,6 +144,7 @@ def hash_to_xml(hash)
     return buf.string
 end
 
+# TODO: cli options instead of stdin input
 if __FILE__ == $PROGRAM_NAME
     input = {}
 
