@@ -1,4 +1,6 @@
 require 'logger'
+require 'rexml'
+require 'stringio'
 
 $logger = Logger.new(STDERR)
 $logger.level = Logger::DEBUG
@@ -42,6 +44,7 @@ class Fusion360
         def calculate_values_with_offset(offset = 0)
             values = {}
             values[:pitch] = @pitch
+            values[:gender] = @gender
             case @gender
             when :internal
                 values[:minor_dia] = diameter + offset
@@ -71,6 +74,27 @@ def simple_print_hash(hash)
     puts "}"
 end
 
+# TODO: this is a POC of using REXML, needs work
+def hash_to_xml(hash)
+    xml = REXML::Document.new
+    root = REXML::Element.new('Thread')
+    xml.add(root)
+
+    hash.each do |k,v|
+        e = REXML::Element.new(k.to_s)
+        e.push(REXML::Text.new(v.to_s))
+        xml.root.add(e)
+    end
+
+    buf = StringIO.new
+
+    formatter = REXML::Formatters::Pretty.new(4)
+    formatter.compact = true
+    formatter.write(xml, buf)
+
+    return buf.string
+end
+
 if __FILE__ == $PROGRAM_NAME
     input = {}
 
@@ -96,5 +120,6 @@ if __FILE__ == $PROGRAM_NAME
     [0.0, 0.1, 0.2, 0.3, 0.4].each do |offset|
         puts "offset #{offset}"
         simple_print_hash t.calculate_values_with_offset(offset)
+#        puts hash_to_xml(t.calculate_values_with_offset(offset))
     end
 end
