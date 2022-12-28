@@ -60,3 +60,7 @@ What do the markings mean?
             * https://www.calculatoratoz.com/en/pitch-diameter-of-external-thread-given-pitch-calculator/Calc-15728
         * Calculate minor diameter: `minor_diameter = major_diameter - (1.227 * pitch)`
             * https://www.calculatoratoz.com/en/minor-diameter-of-external-thread-given-pitch-and-major-diameter-of-internal-thread-calculator/Calc-15811
+
+### `f360-thread-calculator.rb`
+
+I wrote this to take input and calculate parameters. I don't recommend using it, as it's a bit of a mess, but you're welcome to poke around with it if you know Ruby. I'll be cleaning it up over time and will update here when it's generally usable.
