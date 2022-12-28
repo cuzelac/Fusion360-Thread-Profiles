@@ -13,7 +13,11 @@ describe Fusion360::ThreadCalculator do
                 o = Fusion360::ThreadCalculator.with_tpi(22, :internal, 22)
                 assert o.valid?
             end
-            it 'passes along options to private constructor'
+            it 'sets options when passed' do
+                significant_digits = 10
+                o = Fusion360::ThreadCalculator.with_tpi(22, :internal, 22, {significant_digits: significant_digits})
+                assert_equal significant_digits, o.significant_digits
+            end
         end
 
         describe '.with_pitch' do
@@ -21,12 +25,12 @@ describe Fusion360::ThreadCalculator do
                 o = Fusion360::ThreadCalculator.with_pitch(1.2, :internal, 22)
                 assert o.valid?
             end
-            it 'passes along options to private constructor'
+            it 'passes along options to private constructor' do
+                significant_digits = 10
+                o = Fusion360::ThreadCalculator.with_pitch(22, :internal, 22, {significant_digits: significant_digits})
+                assert_equal significant_digits, o.significant_digits
+            end
         end
-    end
-
-    describe 'private constructor' do
-        it 'sets significant digits for calculations'
     end
 
     describe '#tpi_to_pitch' do
