@@ -33,6 +33,20 @@ describe Fusion360::ThreadCalculator do
         end
     end
 
+    describe '#add_offsets' do
+        it 'adds a single offset' do
+            @i.add_offsets(0.1)
+            assert_equal [0.0, 0.1], @i.offsets
+            assert @i.valid?
+        end
+
+        it 'adds as many offsets as you provide in the arguments' do
+            @i.add_offsets(0.1, 0.2, 0.4)
+            assert_equal [0.0, 0.1, 0.2, 0.4], @i.offsets
+            assert @i.valid?
+        end
+    end
+
     describe '#tpi_to_pitch' do
         it 'takes threads per inch and calculates pitch in mm' do
             assert_equal 5.08, @i.tpi_to_pitch(5)
@@ -44,6 +58,48 @@ describe Fusion360::ThreadCalculator do
             assert_raises(Fusion360::ThreadCalculator::GenderError) do
                  @i.gender = :FAKE_GENDER
             end
+        end
+    end
+
+    describe '#thread_designation' do
+        it 'returns a string representation of the F360 thread designation' do
+            assert_equal "3x1.15", @i.thread_designation
+        end
+    end
+
+    describe '#calculate_for_offsets' do
+        it 'returns an array of hashes' do
+            @i.add_offsets(0.1)
+            result = @i.calculate_for_offsets
+            assert result.is_a?(Array)
+            assert result.all?(Hash)
+        end
+    end
+
+    describe '#calculate_values_with_offset' do
+        it 'returns a hash' do
+            assert @i.calculate_values_with_offset.is_a?(Hash)
+        end
+        it 'internal threads: returns correct hash' do
+            expected = {
+                gender: :internal,
+                minor_dia: 3,
+                major_dia: 4.25,
+                pitch_dia: 3.5,
+                tap_drill: 3,
+                class: 0
+            }
+            assert_equal expected, @i.calculate_values_with_offset
+        end
+        it 'external threads: returns correct hash' do
+            expected = {
+                gender: :external,
+                class: 0,
+                major_dia: 3,
+                pitch_dia: 2.25,
+                minor_dia:1.59
+            }
+            assert_equal expected, @e.calculate_values_with_offset
         end
     end
 

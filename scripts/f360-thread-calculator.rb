@@ -41,13 +41,14 @@ class Fusion360
         end
         private_class_method :new
 
-        def add_offset(offset)
-            @offsets.push(offset)
+        def add_offsets(*offsets)
+            @offsets += offsets
         end
 
         def valid?
             return false unless @pitch.is_a?(Numeric)
             return false unless @diameter.is_a?(Numeric)
+            return false unless @offsets.all?(Numeric)
             return false unless @significant_digits.is_a?(Integer)
             return false unless ALLOWED_GENDERS.include?(@gender)
             return true
@@ -65,10 +66,19 @@ class Fusion360
             return "#{@diameter}x#{@pitch}"
         end
 
+        def calculate_for_offsets
+            result = []
+            @offsets.each do |offset|
+                result << calculate_values_with_offset(offset)
+            end
+
+            return result
+        end
+
         def calculate_values_with_offset(offset = 0)
             values = {}
-            values[:pitch] = @pitch
             values[:gender] = @gender
+            values[:class] = offset
             case @gender
             when :internal
                 values[:minor_dia] = (diameter + offset).round(@significant_digits)
@@ -163,12 +173,10 @@ if __FILE__ == $PROGRAM_NAME
 
 #    t = Fusion360::ThreadCalculator.with_tpi(input[:tpi], input[:gender], input[:diameter])
     t = Fusion360::ThreadCalculator.with_pitch(input[:pitch], input[:gender], input[:diameter])
-    # manually set pitch because constructor only takes tpi
-    t.pitch = input[:pitch]
+    t.add_offsets(0.1, 0.2, 0.3, 0.4)
 
-    [0.0, 0.1, 0.2, 0.3, 0.4].each do |offset|
-        puts "offset #{offset}"
-        simple_print_hash t.calculate_values_with_offset(offset)
-#        puts hash_to_xml(t.calculate_values_with_offset(offset))
+    t.calculate_for_offsets.each do |result|
+        simple_print_hash result
     end
+
 end
