@@ -1,3 +1,6 @@
+﻿tpi = .9
+pitch = 25.4 * 1/tpi => 28.222
+
 offset = .1
 
 pitch = 0.977
@@ -6,14 +9,14 @@ pitch = 0.977
 
 minor_diameter = 9.45
 
-major_diameter = (1.083 * pitch) + (minor_diameter + offset) => 10.61
+major_diameter = (1.083 * pitch) + (minor_diameter + offset) => 10.608
 
-pitch_diameter = major_diameter - (0.650 * pitch) => 9.97
+pitch_diameter = major_diameter - (0.650 * pitch) => 9.973
 
 #external threads
 
 major_diameter = 10.51
 
-pitch_diameter = (major_diameter - offset) - (0.650 * pitch) => 9.77
+pitch_diameter = (major_diameter - offset) - (0.650 * pitch) => 9.775
 
-minor_diameter = (major_diameter - offset) - (1.227 * pitch) => 9.21
+minor_diameter = (major_diameter - offset) - (1.227 * pitch) => 9.211
