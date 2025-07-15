@@ -64,3 +64,17 @@ What do the markings mean?
 ### `scripts/f360-thread-calculator.rb`
 
 I wrote this to take input and calculate parameters. I don't recommend using it yet, as input is messy, but it's tested and you're welcome to poke around with it if you know Ruby. I'll be cleaning it up over time and will update here when it's generally usable.
+
+#### Usage
+
+Run the script directly with Ruby:
+```bash
+ruby scripts/f360-thread-calculator.rb
+```
+
+The script will prompt you for:
+1. **Pitch in mm**: Thread pitch (e.g., 1.5 for M10x1.5)
+2. **Internal/External**: Thread gender - type `internal` for nuts or `external` for screws
+3. **Diameter**: The measured diameter from your calipers
+
+The script outputs calculated thread parameters (major/minor/pitch diameters) with multiple offset classes (0.1, 0.2, 0.3, 0.4mm) that you can use in Fusion 360 thread profiles.
