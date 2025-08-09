@@ -1,0 +1,21 @@
+---
+description: Commit policy for automated edits; auto-commit with descriptive messages and defer commits until tests pass when tests were changed
+alwaysApply: true
+---
+
+### Commit policy for automated edits
+
+- Automatically commit any changes you make with descriptive commit messages.
+- If you have been working on tests, do not commit before all tests are passing.
+
+#### Commit message guidelines
+
+- Use imperative mood, summarize the change and its intent.
+- Include scope when useful (e.g., `scripts:`, `rules:`).
+- Reference files or areas touched when it adds clarity.
+
+Examples:
+
+- `rules: add commit policy rule to enforce auto-commit and green tests`
+- `scripts: fix rounding in pitch calculation; update unit tests`
+
