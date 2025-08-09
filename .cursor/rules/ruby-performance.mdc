@@ -1,0 +1,29 @@
+---
+description: Practical Ruby performance and memory tips
+globs: *.rb
+alwaysApply: false
+---
+
+### Collections and iteration
+
+- Use `each` when ignoring return values; avoid creating intermediate arrays.
+- Prefer `each_with_object` to build hashes/arrays without external mutation.
+- Pre-size arrays when large and known, or use `Array.new(n)` appropriately.
+
+### Strings
+
+- Use `String#<<` for incremental concatenation in hot paths; avoid `+` in loops.
+- Pre-freeze static strings and use constants.
+- Use `StringIO` for building large strings.
+
+### Objects and allocations
+
+- Freeze constants and configuration objects.
+- Reuse heavy objects (e.g., regexps) as constants.
+- Avoid needless conversions; keep values in their native types.
+
+### Algorithms
+
+- Choose the right data structure (hash lookups over linear scans when feasible).
+- Avoid O(n^2) patterns on large inputs.
+

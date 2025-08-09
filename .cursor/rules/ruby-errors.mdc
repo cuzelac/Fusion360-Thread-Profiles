@@ -1,0 +1,24 @@
+---
+description: Error handling and exceptions in Ruby
+globs: *.rb
+alwaysApply: false
+---
+
+### Defining errors
+
+- Subclass `StandardError` for application-specific errors.
+- Name errors after the failure condition (e.g., `GenderError`, `ConfigurationError`).
+
+### Raising and rescuing
+
+- Raise with clear messages and relevant context.
+- Rescue only specific exceptions; avoid rescuing `Exception`.
+- Do not use exceptions for normal control flow.
+- Use `ensure` for cleanup; avoid swallowing errors silently.
+- When rescuing to log, re-raise unless the error is fully handled.
+
+### Validation
+
+- Validate inputs at boundaries; fail fast with actionable messages.
+- Prefer predicate methods and `ArgumentError` for invalid arguments; `RuntimeError` as a last resort.
+

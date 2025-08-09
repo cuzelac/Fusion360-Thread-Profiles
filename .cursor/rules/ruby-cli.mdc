@@ -1,0 +1,28 @@
+---
+description: Conventions for Ruby CLI/scripts (argument parsing, logging, I/O)
+globs: *.rb
+alwaysApply: false
+---
+### Entrypoints
+
+- Use a shebang for executables: `#!/usr/bin/env ruby`.
+- Place CLI executables in `bin/` when part of a project; mark executable (`chmod +x`).
+- Guard script entry with `if __FILE__ == $PROGRAM_NAME`.
+
+### Arguments and configuration
+
+- Prefer `OptionParser` over interactive `gets`; support `--help`.
+- Provide sensible defaults and `--verbose/--quiet` flags.
+- Read environment variables via `ENV.fetch("NAME", default)` when appropriate.
+
+### Logging and output
+
+- Use `Logger` or `warn`/`puts` intentionally; separate user output from logs.
+- Avoid globals like `$logger`; inject a logger or use a module-level constant.
+- Exit with non-zero status on failure (e.g., `exit 1`); avoid silent failures.
+
+### I/O
+
+- Read from `STDIN` when piping; avoid prompting in non-interactive contexts.
+- Validate inputs; print actionable error messages.
+

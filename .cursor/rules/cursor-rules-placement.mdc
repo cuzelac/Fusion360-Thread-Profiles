@@ -1,0 +1,50 @@
+---
+description: Conventions for Cursor rule placement, YAML front matter, and naming.
+globs:
+alwaysApply: false
+---
+
+### Cursor rule placement and naming
+
+- "Cursor rules" are project conventions files for Cursor and must follow these requirements:
+  - Always live in `.cursor/rules/`
+  - Always begin with MDC YAML front matter as described in the Cursor docs
+    - Required: `description`
+    - Optional: `globs`, `alwaysApply`
+  - `globs` must be a scalar file-only pattern (no lists, no dirglobs, no quotes). Example: `*.rb`
+  - Filenames must end with `.mdc`
+  - Filenames must follow `TYPE-RULE_NAME.mdc`
+    - `TYPE` is usually the programming language (e.g., `python`, `typescript`) but may also be other scopes such as `cursor`
+
+#### Language-scoped rules (globs)
+
+- If a rule is scoped to a language (as indicated by `TYPE` in the filename), add an appropriate file-only `globs` pattern so the rule can auto-attach when those files are referenced.
+- Suggested `globs` by language (file-only, scalar):
+  - TypeScript: `*.ts`
+  - JavaScript: `*.js`
+  - Python: `*.py`
+  - Go: `*.go`
+  - Rust: `*.rs`
+
+Example front matter for a TypeScript-scoped rule:
+
+```yaml
+---
+description: Enforce TypeScript import conventions
+globs: *.ts
+alwaysApply: false
+---
+```
+
+#### Examples
+
+- Correct
+  - `.cursor/rules/python-formatting.mdc`
+  - `.cursor/rules/typescript-imports.mdc`
+  - `.cursor/rules/cursor-rules-placement.mdc`
+
+- Incorrect
+  - `.cursor/cursor-rules-placement.md` (wrong directory and extension)
+  - `rules/cursor-rules-placement.mdc` (wrong directory)
+  - `.cursor/rules/JS.mdc` (does not follow `TYPE-RULE_NAME` pattern)
+

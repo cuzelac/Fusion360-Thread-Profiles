@@ -1,0 +1,39 @@
+---
+description: Ruby style and formatting conventions (naming, layout, literals)
+globs: *.rb
+alwaysApply: false
+---
+
+### Style and formatting
+
+- **indentation**: 2 spaces; no tabs.
+- **line length**: target 100 columns; wrap long expressions.
+- **magic comment**: prefer `# frozen_string_literal: true` for library files; optional for short scripts.
+- **whitespace**: no trailing spaces; newline at EOF.
+
+### Naming
+
+- **classes/modules**: `CamelCase`.
+- **methods/variables**: `snake_case`.
+- **constants**: `UPPER_SNAKE_CASE` and immutable (freeze if needed).
+- **predicates**: end with `?` and return strict booleans.
+- **bang methods**: end with `!` only when they mutate or have dangerous side-effects.
+
+### Structure
+
+- **visibility**: group related methods; use explicit `private`/`protected` sections.
+- **attrs**: prefer `attr_reader`; add writers only when necessary (avoid blanket `attr_accessor`).
+- **returns**: avoid unnecessary `return`; let the last expression be the value.
+- **strings**: single quotes unless interpolation/escapes are needed.
+- **symbols**: use symbols for identifiers/keys when stable.
+
+### Collections and literals
+
+- **frozen literals**: prefer frozen constant arrays/hashes for lookups.
+- **hash kwargs**: prefer keyword arguments over generic option hashes for clarity.
+- **regexp**: predeclare heavy regexes as constants.
+
+### Requiring files
+
+- Use `require_relative` for intra-project files; `require` for gems/stdlib.
+
