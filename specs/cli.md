@@ -19,7 +19,7 @@ The thread angle applies to the entire XML file. Appending to an existing XML re
 Exactly one of `--internal` or `--external` is required.
 
 - `--angle ANGLE` (Float): Any numeric angle is allowed. Applies to the entire XML file.
-- `--pitch PITCH_IN_MM` (Float > 0)
+- `--pitch PITCH_IN_MM` (Float > 0) or `--tpi THREADS_PER_INCH` (Float > 0). Exactly one of these must be provided. When `--tpi` is given, the tool converts to pitch in mm internally using `25.4 / TPI`.
 - `--diameter DIAMETER_IN_MM` (Float > 0)
 - `--internal` or `--external`
 
@@ -44,7 +44,7 @@ Semantics of `--diameter`:
 - With `--xml PATH`:
   - If the file exists: merge the computed designation(s) into the document (see File I/O & Merge spec). The `--angle` must equal the file's `<Angle>`, and the file must use `<Unit>mm</Unit>`.
   - If the file does not exist: create a new document at that path using provided root metadata (`--name`, `--custom-name`, `--sort-order`).
-- Always emit `<Unit>mm</Unit>` and `<Pitch>` values. Logs go to STDERR.
+- Always emit `<Unit>mm</Unit>` and `<Pitch>` values. If `--tpi` is used, the pitch is calculated as `25.4 / TPI` before emission. Logs go to STDERR.
 
 ### Examples
 
@@ -54,10 +54,10 @@ Generate a new internal thread definition (any angle) to STDOUT:
 generate-threads --angle 55 --pitch 1.814 --diameter 18.524 --internal
 ```
 
-Append an external thread to an existing XML, updating/adding classes, and write in-place:
+Append an external thread to an existing XML using TPI input, updating/adding classes, and write in-place:
 
 ```sh
-generate-threads --angle 60 --pitch 0.8 --diameter 4.0 --external \
+generate-threads --angle 60 --tpi 31.75 --diameter 4.0 --external \
   --xml manual_metric.xml
 ```
 

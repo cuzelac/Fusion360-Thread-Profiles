@@ -2,13 +2,19 @@
 
 ### Inputs
 
-- `pitch` (mm) > 0
+- `pitch` (mm) > 0 (either provided directly or derived from TPI)
+- `tpi` (threads per inch) > 0 (optional; mutually exclusive with pitch)
 - `gender`: `internal` or `external`
 - `diameter` (mm) > 0
   - For `internal`, `diameter` is the measured minor diameter.
   - For `external`, `diameter` is the measured major diameter.
 
 ### Formulas (from README and validated in tests)
+### Converting TPI to pitch
+
+- If `tpi` is provided, convert to pitch in mm: `pitch_mm = 25.4 / tpi`.
+- After conversion, proceed with the same formulas as above.
+
 
 Let `p = pitch`.
 

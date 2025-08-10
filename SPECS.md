@@ -6,7 +6,7 @@ This document links to all domain and technical specifications for the CLI that 
 
 | Domain | File | Summary |
 |---|---|---|
-| CLI | [specs/cli.md](specs/cli.md) | Command name, options, usage, examples, exit codes |
+| CLI | [specs/cli.md](specs/cli.md) | Command name, options (including --tpi), usage, examples, exit codes |
 | Calculations | [specs/calculations.md](specs/calculations.md) | Formulas, offsets/classes, fixed two-decimal rounding |
 | XML Schema | [specs/xml-schema.md](specs/xml-schema.md) | Structure of Fusion 360 thread XML and mapping from computed values |
 | Angle Handling | [specs/angle-handling.md](specs/angle-handling.md) | Angle applies to entire file; any numeric angle; enforcement rules |

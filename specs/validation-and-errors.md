@@ -3,7 +3,7 @@
 ### Argument validation
 
 - `--angle`: required; numeric; any value accepted.
-- `--pitch`: required; numeric; `> 0`.
+- `--pitch` or `--tpi`: exactly one required; numeric; `> 0`.
 - `--diameter`: required; numeric; `> 0`.
 - Exactly one of `--internal` or `--external` must be provided.
 - `--offsets`: optional; comma-separated numeric list; all `>= 0`.
@@ -26,7 +26,7 @@
 ### Exit codes
 
 - `64`: usage/configuration error
-- `65`: validation/data error (e.g., negative numbers; unsupported unit in existing XML; invalid use of `--name`/`--custom-name` while merging)
+- `65`: validation/data error (e.g., negative numbers; unsupported unit in existing XML; invalid use of `--name`/`--custom-name` while merging; both or neither of `--pitch`/`--tpi`)
 - `66`: XML parse/structure error
 - `67`: angle mismatch
 - `74`: I/O error

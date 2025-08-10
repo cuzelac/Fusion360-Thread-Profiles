@@ -10,6 +10,7 @@
   - Internal: major, pitch, minor (via offset), tap drill equals minor.
   - External: pitch, minor; offsets applied correctly.
 - Test multiple offsets list and per-class outputs.
+- TPI path: when `--tpi` is provided, confirm `pitch == 25.4 / tpi` and downstream values are identical to direct pitch input.
 
 ### Unit tests: XML generation
 
@@ -33,7 +34,7 @@
 
 - Missing required flags → exit 64.
 - Both `--internal` and `--external` set or neither set → exit 64.
-- Negative or zero `pitch`/`diameter` → exit 65.
+- Negative or zero `pitch`/`tpi`/`diameter` → exit 65.
 - Existing XML has `<Unit>` not equal to `mm` → exit 65.
 - Using `--name`/`--custom-name` while merging into existing file → exit 65.
 - Input XML unreadable/malformed → exit 66.
