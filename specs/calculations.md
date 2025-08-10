@@ -34,8 +34,8 @@ External (screws):
 
 ### Rounding and formatting
 
-- Default decimal places: `2` (configurable via `--digits`).
-- Round each computed value to the configured number of decimal places before serialization.
+- Decimal places: always `2`.
+- Round each computed value to two decimal places before serialization.
 - The `Class` string must be formatted as `O.x` with one decimal place.
 
 ### Thread designation and size

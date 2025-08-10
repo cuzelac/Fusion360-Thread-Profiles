@@ -3,9 +3,9 @@
 ### Rules
 
 - The thread angle applies to the entire XML file.
-- Supported angles: `55.0` (Whitworth) and `60.0` (Metric).
+- Any numeric `--angle` value is allowed.
 - When creating a new document, set `<Angle>` to `--angle`.
-- When appending to an existing document via `--input-xml`, the provided `--angle` must exactly match the file's `<Angle>` value. If not, exit with code `67`.
+- When merging into an existing document via `--xml PATH` (that exists), the provided `--angle` must match the file's `<Angle>` value. If not, exit with code `67`.
 
 ### Rationale
 
@@ -13,7 +13,7 @@ Fusion 360 expects the `Angle` to be consistent within a `ThreadType`. Mixing an
 
 ### Validation
 
-- Reject non-numeric or unsupported angles.
+- Reject non-numeric angles.
 - Normalize input to one decimal place when comparing (e.g., `55` equals `55.0`).
 
 

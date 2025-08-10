@@ -2,17 +2,17 @@
 
 ### Inputs
 
-- `--input-xml PATH`: optional. If present, merge new definitions into this file.
-- `--output PATH`: optional. If present, write the resulting XML to this path. Defaults:
-  - With `--input-xml`: overwrite input in-place when `--output` is omitted.
-  - Without `--input-xml`: write to STDOUT when `--output` is omitted.
+- `--xml PATH`: optional. If present, determines file behavior:
+  - If the file exists: merge new definitions into this file and overwrite in-place.
+  - If the file does not exist: create a new file at this path.
+  - If omitted: write the generated XML to STDOUT.
 
 ### Reading and validation
 
 - Parse XML with REXML.
 - Validate root is `<ThreadType>`.
-- Validate `<Unit>` is `mm` (or set it when creating new files).
-- Read `<Angle>` and ensure it matches `--angle` (see Angle Handling); otherwise error.
+- Validate `<Unit>` is `mm` when merging. New files are always created with `<Unit>mm</Unit>`.
+- Read `<Angle>` and ensure it matches `--angle` when merging (see Angle Handling); otherwise error.
 
 ### Grouping and merge keys
 

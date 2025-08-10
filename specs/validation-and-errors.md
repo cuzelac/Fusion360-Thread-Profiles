@@ -2,18 +2,19 @@
 
 ### Argument validation
 
-- `--angle`: required; numeric; allowed: `55`, `55.0`, `60`, `60.0`.
+- `--angle`: required; numeric; any value accepted.
 - `--pitch`: required; numeric; `> 0`.
 - `--diameter`: required; numeric; `> 0`.
 - Exactly one of `--internal` or `--external` must be provided.
-- `--digits`: optional; integer; `>= 0`.
 - `--offsets`: optional; comma-separated numeric list; all `>= 0`.
-- `--unit`: only `mm` supported.
+- `--xml PATH`: optional; file path. If exists, will be merged into; if not, a new file is created.
+- `--name`/`--custom-name`: allowed only when creating a new file (no existing `--xml` file). Treat as invalid when merging.
 
 ### Runtime validation
 
-- For `--input-xml`, ensure file exists and is readable; root is `<ThreadType>`.
+- For `--xml PATH` that exists, ensure file is readable; root is `<ThreadType>`.
 - Angle in file matches `--angle` (after one-decimal-place normalization).
+- Unit in file must be `mm`; otherwise, treat as validation/data error.
 
 ### Error classes (Ruby)
 
@@ -25,7 +26,7 @@
 ### Exit codes
 
 - `64`: usage/configuration error
-- `65`: validation/data error (e.g., negative numbers)
+- `65`: validation/data error (e.g., negative numbers; unsupported unit in existing XML; invalid use of `--name`/`--custom-name` while merging)
 - `66`: XML parse/structure error
 - `67`: angle mismatch
 - `74`: I/O error
