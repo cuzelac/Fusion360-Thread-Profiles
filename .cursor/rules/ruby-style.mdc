@@ -27,6 +27,11 @@ alwaysApply: false
 - **strings**: single quotes unless interpolation/escapes are needed.
 - **symbols**: use symbols for identifiers/keys when stable.
 
+### Comments
+
+- Complex code and business logic should be commented.
+- Comments should be descriptive and concise; explain "why", not "how".
+
 ### Collections and literals
 
 - **frozen literals**: prefer frozen constant arrays/hashes for lookups.
