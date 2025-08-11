@@ -1,5 +1,7 @@
 require 'logger'
-require 'rexml'
+require 'rexml/document'
+require 'rexml/formatters/pretty'
+require 'rexml/text'
 require 'stringio'
 
 $logger = Logger.new(STDERR)
