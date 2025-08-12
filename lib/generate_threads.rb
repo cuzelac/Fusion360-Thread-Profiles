@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require 'logger'
+require 'stringio'
 require 'rexml/document'
 require 'rexml/formatters/pretty'
+require_relative '../scripts/f360-thread-calculator'
 
 module GenerateThreads
   class ConfigurationError < StandardError; end
