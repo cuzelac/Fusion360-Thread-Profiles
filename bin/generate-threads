@@ -4,15 +4,13 @@
 
 require 'optparse'
 require 'logger'
-require 'rexml/document'
-require 'rexml/formatters/pretty'
 require_relative '../lib/generate_threads'
-require_relative '../scripts/f360-thread-calculator'
 
 def build_logger(verbose_count, quiet_count)
+  # INFO +/- verbosity, clamped to [DEBUG, ERROR]
   level = Logger::INFO
-  level -= (verbose_count.to_i * 1)
-  level += (quiet_count.to_i * 1)
+  level -= verbose_count.to_i
+  level += quiet_count.to_i
   level = Logger::DEBUG if level <= Logger::DEBUG
   level = Logger::ERROR if level >= Logger::ERROR
   logger = Logger.new($stderr)
