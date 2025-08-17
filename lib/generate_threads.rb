@@ -76,6 +76,7 @@ module GenerateThreads
     # - :name [String] root <Name> when creating a new XML file
     # - :custom_name [String] root <CustomName> when creating a new XML file
     # - :sort_order [Integer] root <SortOrder> when creating a new XML file
+    # - :xml_comment [String] XML comment to insert in newly created ThreadSize elements
     #
     # @param options [Hash{Symbol=>Object}] configuration from the CLI
     # @return [String] pretty-printed XML document
@@ -102,16 +103,16 @@ module GenerateThreads
         if File.exist?(options[:xml])
           doc = read_xml!(options[:xml])
           validate_existing_doc!(doc, angle)
-          result = merge_into_doc(doc, calculator, angle)
+          result = merge_into_doc(doc, calculator, angle, options)
           return pretty_print(result)
         else
           doc = build_new_doc(options, angle)
-          result = merge_into_doc(doc, calculator, angle)
+          result = merge_into_doc(doc, calculator, angle, options)
           return pretty_print(result)
         end
       else
         doc = build_new_doc(options, angle)
-        result = merge_into_doc(doc, calculator, angle)
+        result = merge_into_doc(doc, calculator, angle, options)
         return pretty_print(result)
       end
     end
@@ -168,11 +169,11 @@ module GenerateThreads
 
       if got_pitch
         pitch = options[:pitch].to_f
-        raise ValidationError, '--pitch must be > 0' unless pitch.positive?
+        raise ValidationError, '--pitch must be > 0' unless pitch > 0
         pitch
       else
         tpi = options[:tpi].to_f
-        raise ValidationError, '--tpi must be > 0' unless tpi.positive?
+        raise ValidationError, '--tpi must be > 0' unless tpi > 0
         (25.4 / tpi).round(2)
       end
     end
@@ -187,6 +188,11 @@ module GenerateThreads
       raise ConfigurationError, '--diameter is required' unless options[:diameter].is_a?(Numeric)
       raise ConfigurationError, 'Exactly one of --internal or --external is required' unless [:internal, :external].include?(options[:gender])
 
+      # Validate numeric values are positive
+      if options[:diameter].is_a?(Numeric) && options[:diameter] <= 0
+        raise ValidationError, '--diameter must be > 0'
+      end
+
       if options[:offsets]
         unless options[:offsets].is_a?(Array) && options[:offsets].all? { |o| o.is_a?(Numeric) && o >= 0 }
           raise ValidationError, '--offsets must be a comma-separated list of non-negative numbers'
@@ -196,6 +202,12 @@ module GenerateThreads
       if options[:xml] && File.exist?(options[:xml])
         if options[:name] || options[:custom_name]
           raise ValidationError, '--name/--custom-name not allowed when merging into existing --xml file'
+        end
+      end
+
+      if options[:xml_comment]
+        if options[:xml_comment].include?('--')
+          raise ValidationError, '--xml-comment text must not contain "--" (invalid in XML comments)'
         end
       end
     end
@@ -231,13 +243,21 @@ module GenerateThreads
     # @param calculator [Fusion360::ThreadCalculator]
     # @param angle [Numeric]
     # @return [REXML::Document]
-    def merge_into_doc(doc, calculator, angle)
+    def merge_into_doc(doc, calculator, angle, options = {})
       size_value = format('%.2f', nominal_size_for(calculator))
       pitch_value = format('%.2f', calculator.pitch)
       designation_text = "#{size_value}x#{pitch_value}"
 
       root = doc.root
-      size_node = find_or_create_child_with_text(root, 'ThreadSize', 'Size', size_value)
+      size_node, was_created = find_or_create_child_with_text(root, 'ThreadSize', 'Size', size_value)
+      
+      # Add XML comment if this is a newly created ThreadSize and comment is provided
+      if options[:xml_comment] && was_created
+        comment = REXML::Comment.new(options[:xml_comment])
+        size_node.insert_before(size_node.elements['Size'], comment)
+        @logger.debug("Added XML comment to newly created ThreadSize: #{options[:xml_comment]}") if @logger
+      end
+      
       designation_node = find_or_create_child(size_node, 'Designation')
       set_or_update_text(designation_node, 'ThreadDesignation', designation_text)
       set_or_update_text(designation_node, 'CTD', designation_text)
@@ -305,14 +325,14 @@ module GenerateThreads
     # @param container_name [String]
     # @param child_name [String]
     # @param text [String]
-    # @return [REXML::Element]
+    # @return [Array<REXML::Element, Boolean>] [element, was_created]
     def find_or_create_child_with_text(parent, container_name, child_name, text)
       parent.each_element(container_name) do |node|
-        return node if text_of(node, child_name) == text
+        return [node, false] if text_of(node, child_name) == text
       end
       node = parent.add_element(container_name)
       node.add_element(child_name).text = text
-      node
+      [node, true]
     end
 
     # Sets text of a child element, creating the element when needed.

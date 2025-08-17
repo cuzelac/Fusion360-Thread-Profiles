@@ -26,7 +26,8 @@ if __FILE__ == $PROGRAM_NAME
     sort_order: 3,
     verbose_count: 0,
     quiet_count: 0,
-    dry_run: false
+    dry_run: false,
+    xml_comment: nil
   }
 
   parser = OptionParser.new do |opts|
@@ -45,6 +46,7 @@ if __FILE__ == $PROGRAM_NAME
     opts.on('--name NAME', 'Root <Name> when creating new file') { |v| options[:name] = v }
     opts.on('--custom-name NAME', 'Root <CustomName> when creating new file') { |v| options[:custom_name] = v }
     opts.on('--sort-order N', Integer, 'Root <SortOrder> when creating new file') { |v| options[:sort_order] = v }
+    opts.on('--xml-comment STRING', 'XML comment to insert in newly created ThreadSize elements') { |v| options[:xml_comment] = v }
     opts.on('--verbose', 'Increase log verbosity') { options[:verbose_count] += 1 }
     opts.on('--quiet', 'Decrease log verbosity') { options[:quiet_count] += 1 }
     opts.on('--dry-run', 'Do not write files; print actions and XML to STDOUT') { options[:dry_run] = true }
