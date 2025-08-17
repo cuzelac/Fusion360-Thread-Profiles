@@ -148,7 +148,7 @@ module GenerateThreads
       doc = REXML::Document.new
       root = doc.add_element('ThreadType')
       root.add_element('Name').text = options[:name] || 'Generated Threads'
-      root.add_element('CustomName').text = options[:custom_name] || 'Generated Threads'
+      root.add_element('CustomName').text = options[:custom_name] || options[:name] || 'Generated Threads'
       root.add_element('Unit').text = 'mm'
       root.add_element('Angle').text = format('%.1f', angle.to_f)
       root.add_element('SortOrder').text = (options[:sort_order] || 3).to_s

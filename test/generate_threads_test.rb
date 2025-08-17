@@ -67,6 +67,18 @@ class GenerateThreadsTest < Minitest::Test
       end
     end
   end
+
+  def test_custom_name_defaults_to_name_when_not_provided
+    xml = @app.run(angle: 60.0, pitch: 0.90, diameter: 9.45, gender: :internal, name: 'Test Thread Name')
+    assert_includes xml, '<Name>Test Thread Name</Name>'
+    assert_includes xml, '<CustomName>Test Thread Name</CustomName>'
+  end
+
+  def test_custom_name_uses_explicit_value_when_provided
+    xml = @app.run(angle: 60.0, pitch: 0.90, diameter: 9.45, gender: :internal, name: 'Test Thread Name', custom_name: 'Custom Display Name')
+    assert_includes xml, '<Name>Test Thread Name</Name>'
+    assert_includes xml, '<CustomName>Custom Display Name</CustomName>'
+  end
 end
 
 
