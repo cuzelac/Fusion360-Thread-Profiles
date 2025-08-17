@@ -38,12 +38,14 @@ Represents an entire thread family/standard. It must contain the following child
 Defines a specific nominal size (diameter) within the thread family. This element groups all thread designations (pitch/series variations) for that size.
 
 **Parent:** `<ThreadType>`
-**Children:** `<Size>`, one or more `<Designation>`
+**Children:** optional XML comment(s), `<Size>`, one or more `<Designation>`
 
 * **Size** (required, string/number): The nominal diameter of the thread, used as the “Size” value in Fusion’s UI. This can be given as a numeric value (for metric, usually in millimeters) or a fractional inch notation for imperial sizes. Use a format that clearly represents the size in user terms.
   *Examples:* `<Size>5.0</Size>` for a 5 mm thread, `<Size>1/4</Size>` for a 1/4″ thread (fractional inch), or `<Size>0.25</Size>` for 0.25″ in decimal form. (The original thread tables often use common fractions for inch sizes.)
 
 * **Designation** (required, one or more occurrences): Defines a specific thread variant for the given size, typically distinguished by a pitch (for metric) or TPI (for imperial), and sometimes thread series. Each `<Designation>` corresponds to an entry in Fusion’s “Designation” dropdown (often combining size and pitch). For example, a Size of 5.0 mm might have designations for 5 × 0.8 (coarse) and 5 × 0.5 (fine) pitches, and a 1/4″ size might have separate designations for 1/4-20 (UNC) and 1/4-28 (UNF) threads. All `<Designation>` elements for a given size are listed under that size in the UI.
+
+Note: XML comment nodes are allowed anywhere per XML rules. The CLI provides `--xml-comment` to add a leading comment inside newly created `<ThreadSize>` elements. The comment text must not contain `--`.
 
   The `<Designation>` element contains the following child elements:
 

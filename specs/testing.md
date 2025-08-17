@@ -18,6 +18,7 @@
   - Root nodes are set (Name, CustomName, Unit, Angle, SortOrder).
   - When `--name` is provided but no `--custom-name`, the `CustomName` defaults to the same value as the `Name`.
   - One `<ThreadSize>` created with `<Size>` equal to nominal size.
+  - When `--xml-comment` is provided, the `<ThreadSize>` contains a leading XML comment with the exact provided text before `<Size>`.
   - `<Designation>` contains expected `<ThreadDesignation>`, `<CTD>`, `<Pitch>`.
   - `<Thread>` entries for each class/gender with correct values.
 
@@ -28,6 +29,7 @@
   - Append missing classes without duplicating existing ones.
 - Appending where size exists but pitch new: creates new `<Designation>` under existing `<ThreadSize>`.
 - Appending where neither exists: creates both `<ThreadSize>` and `<Designation>`.
+  - If `--xml-comment` is provided, ensure the newly created `<ThreadSize>` includes the comment as the first child.
 - Idempotency: running the same command twice yields identical XML.
 - Enforce that merging requires existing XML `<Unit>` to be `mm`; reject otherwise.
 

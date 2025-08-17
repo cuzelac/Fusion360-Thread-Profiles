@@ -9,6 +9,7 @@
 - `--offsets`: optional; comma-separated numeric list; all `>= 0`.
 - `--xml PATH`: optional; file path. If exists, will be merged into; if not, a new file is created.
 - `--name`/`--custom-name`: allowed only when creating a new file (no existing `--xml` file). Treat as invalid when merging.
+- `--xml-comment`: optional; string to place in an XML comment under newly created `<ThreadSize>` elements. Must not contain the substring `--` which is invalid in XML comments; reject with a configuration error if present. Has no effect on existing `<ThreadSize>` nodes during merges.
 
 ### Runtime validation
 

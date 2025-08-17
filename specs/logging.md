@@ -16,6 +16,7 @@
 
 - INFO: high-level actions (parsing input, generating designation, merge operations).
 - DEBUG: detailed calculations per offset, merge resolution (created/updated/skipped), timing as needed.
+- DEBUG: when `--xml-comment` is used, log when a `<ThreadSize>` is created and the comment is inserted.
 - WARN: non-fatal anomalies (duplicate entries skipped, numeric coercions with rounding).
 - ERROR: fatal errors prior to exit.
 

@@ -34,6 +34,7 @@ Semantics of `--diameter`:
 - `--name STRING` Root `<Name>` when creating a new file only; ignored/invalid when merging into an existing file.
 - `--custom-name STRING` Root `<CustomName>` when creating a new file only; ignored/invalid when merging into an existing file. If `--name` is provided but no `--custom-name`, the `CustomName` defaults to the same value as the `Name`.
 - `--sort-order N` Root `<SortOrder>` when creating a new file; default: `3`.
+- `--xml-comment STRING` Insert an XML comment node as the first child of each `<ThreadSize>` element that this run creates. When merging into an existing `<ThreadSize>`, no comment is added or modified. In a brand-new document, the single created `<ThreadSize>` will include the comment. The comment text must be valid for XML comments (must not contain `--`).
 - `--verbose` Increase log verbosity (INFO → DEBUG). Can be repeated.
 - `--quiet` Reduce log verbosity (INFO → WARN). One level per flag.
 - `--dry-run` Do not write files; print actions and resulting XML to STDOUT.
@@ -66,6 +67,14 @@ Generate with custom offsets to a new file:
 ```sh
 generate-threads --angle 60 --pitch 0.9 --diameter 9.45 --external \
   --offsets 0.0,0.1,0.2,0.3,0.4 --xml 3DPrintedMetricCustom.xml
+```
+
+Add a per-size XML comment when creating a new size (or a new document):
+
+```sh
+generate-threads --angle 60 --pitch 1.411 --diameter 19.0 --internal \
+  --xml-comment "For re-building the nut for Jennifer's car iphone mount" \
+  --xml manual_metric.xml
 ```
 
 ### Exit codes

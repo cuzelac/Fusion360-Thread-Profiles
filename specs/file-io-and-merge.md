@@ -24,6 +24,7 @@
 
 1. Compute values for each offset/class per Calculations spec.
 2. Find or create `<ThreadSize>` with `<Size>` equal to nominal size.
+   - If created and `--xml-comment` was provided, insert an XML comment node with the given text as the first child within the new `<ThreadSize>` element (before `<Size>`).
 3. Within that size, find or create `<Designation>` with matching `<Pitch>`.
    - Set `<ThreadDesignation>` and `<CTD>` to the designation string (`<nominal_size>x<pitch>`).
 4. For each `(Gender, Class)`:
