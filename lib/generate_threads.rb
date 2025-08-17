@@ -4,7 +4,7 @@ require 'logger'
 require 'stringio'
 require 'rexml/document'
 require 'rexml/formatters/pretty'
-require_relative '../scripts/f360-thread-calculator'
+require_relative 'fusion360_thread_calculator'
 
 ##
 # Generates and merges Fusion 360 thread profile XML files.

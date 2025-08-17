@@ -3,7 +3,6 @@ require 'fileutils'
 
 $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
 require 'generate_threads'
-require_relative '../scripts/f360-thread-calculator'
 
 class GenerateThreadsTest < Minitest::Test
   def setup
