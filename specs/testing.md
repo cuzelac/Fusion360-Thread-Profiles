@@ -16,6 +16,7 @@
 
 - New document generation:
   - Root nodes are set (Name, CustomName, Unit, Angle, SortOrder).
+  - When `--name` is provided but no `--custom-name`, the `CustomName` defaults to the same value as the `Name`.
   - One `<ThreadSize>` created with `<Size>` equal to nominal size.
   - `<Designation>` contains expected `<ThreadDesignation>`, `<CTD>`, `<Pitch>`.
   - `<Thread>` entries for each class/gender with correct values.

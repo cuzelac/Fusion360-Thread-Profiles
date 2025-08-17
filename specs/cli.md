@@ -32,7 +32,7 @@ Semantics of `--diameter`:
 - `--xml PATH` If the path exists, merge the generated entries into that file and overwrite it in-place. If it does not exist, create a new XML file at that path. If omitted, write the resulting XML to STDOUT.
 - `--offsets LIST` Comma-separated offsets in mm to produce classes; default: `0.0,0.1,0.2,0.3,0.4`.
 - `--name STRING` Root `<Name>` when creating a new file only; ignored/invalid when merging into an existing file.
-- `--custom-name STRING` Root `<CustomName>` when creating a new file only; ignored/invalid when merging into an existing file.
+- `--custom-name STRING` Root `<CustomName>` when creating a new file only; ignored/invalid when merging into an existing file. If `--name` is provided but no `--custom-name`, the `CustomName` defaults to the same value as the `Name`.
 - `--sort-order N` Root `<SortOrder>` when creating a new file; default: `3`.
 - `--verbose` Increase log verbosity (INFO → DEBUG). Can be repeated.
 - `--quiet` Reduce log verbosity (INFO → WARN). One level per flag.
