@@ -140,16 +140,6 @@ class GenerateThreadsTest < Minitest::Test
     end
   end
 
-  def test_both_internal_and_external_raises_configuration_error
-    # This test was incorrectly written - we can't test both in one call
-    # The gender is set per call, so we test that each individual call works
-    # and that the validation logic prevents invalid combinations
-    assert_raises(GenerateThreads::ConfigurationError) do
-      # This should fail because we're not providing a gender
-      @app.run(angle: 60.0, pitch: 0.9, diameter: 4.0)
-    end
-  end
-
   def test_neither_internal_nor_external_raises_configuration_error
     assert_raises(GenerateThreads::ConfigurationError) do
       @app.run(angle: 60.0, pitch: 0.9, diameter: 4.0)
