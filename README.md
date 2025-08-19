@@ -63,7 +63,7 @@ What do the markings mean?
 
 ### `bin/generate-threads` CLI Tool
 
-I've created a professional command-line tool that automates thread profile generation. It handles all the calculations and generates properly formatted XML files that can be used directly with Fusion 360.
+I've created a command-line tool that automates thread profile generation. It handles all the calculations and generates properly formatted XML files that can be used directly with Fusion 360.
 
 #### Installation
 
@@ -73,17 +73,17 @@ The tool is written in Ruby and requires no external dependencies. Make sure you
 
 Generate a simple thread profile:
 ```bash
-ruby -I lib bin/generate-threads --angle 60 --pitch 1.25 --diameter 10 --external
+ruby bin/generate-threads --angle 60 --pitch 1.25 --diameter 10 --external
 ```
 
 Generate an internal thread with custom offsets:
 ```bash
-ruby -I lib bin/generate-threads --angle 60 --pitch 1.5 --diameter 12 --internal --offsets 0.0,0.1,0.2
+ruby bin/generate-threads --angle 60 --pitch 1.5 --diameter 12 --internal --offsets 0.0,0.1,0.2
 ```
 
 Use TPI instead of pitch:
 ```bash
-ruby -I lib bin/generate-threads --angle 55 --tpi 20 --diameter 8 --external
+ruby bin/generate-threads --angle 55 --tpi 20 --diameter 8 --external
 ```
 
 #### Command Line Options
@@ -94,6 +94,7 @@ ruby -I lib bin/generate-threads --angle 55 --tpi 20 --diameter 8 --external
 - `--diameter DIA`: Nominal diameter in mm
 - `--internal` or `--external`: Thread gender
 - `--offsets LIST`: Comma-separated offsets in mm (default: 0.0,0.1,0.2,0.3,0.4)
+- `--xml-comment 'some comment'`: Add a comment to the xml
 - `--xml PATH`: Output XML file path (optional)
 - `--name NAME`: Custom name for the thread profile
 - `--dry-run`: Preview output without writing files
