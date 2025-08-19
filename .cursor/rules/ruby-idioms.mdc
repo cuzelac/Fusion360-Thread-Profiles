@@ -1,0 +1,32 @@
+---
+description: Idiomatic Ruby patterns (control flow, Enumerable, coercion)
+globs: *.rb
+alwaysApply: false
+---
+
+### Control flow
+
+- **guard clauses**: return early instead of deep nesting.
+- **case/when**: use for discrete branches (e.g., symbols); keep exhaustive where practical.
+- **nil handling**: avoid double negatives; use `||`/`||=` appropriately; prefer explicit defaults over `or`.
+
+### Enumerable
+
+- Use `each` when ignoring the result; `map` when transforming; `select`/`reject` for filtering.
+- Prefer `each_with_object({})` or `to_h` over building hashes via mutation.
+- Use `sum`, `max_by`, `min_by` instead of manual reducers when available.
+
+### Hashes and options
+
+- Prefer keyword arguments; if passing an options hash, validate with `fetch` and defaults.
+- Use symbol keys consistently.
+
+### Type and coercion
+
+- Prefer duck-typing; avoid rigid `is_a?` checks when a protocol suffices.
+- For numeric parsing, use `Integer(str, 10)`/`Float(str)` and handle `ArgumentError` rather than `to_i`/`to_f` on unknown inputs.
+
+### Immutability and side effects
+
+- Minimize mutation; return new objects where feasible.
+- Document side effects; use bang method names only when there is a non-bang alternative.

@@ -61,20 +61,67 @@ What do the markings mean?
         * Calculate minor diameter: `minor_diameter = major_diameter - (1.227 * pitch)`
             * https://www.calculatoratoz.com/en/minor-diameter-of-external-thread-given-pitch-and-major-diameter-of-internal-thread-calculator/Calc-15811
 
-### `scripts/f360-thread-calculator.rb`
+### `bin/generate-threads` CLI Tool
 
-I wrote this to take input and calculate parameters. I don't recommend using it yet, as input is messy, but it's tested and you're welcome to poke around with it if you know Ruby. I'll be cleaning it up over time and will update here when it's generally usable.
+I've created a command-line tool that automates thread profile generation. It handles all the calculations and generates properly formatted XML files that can be used directly with Fusion 360.
 
-#### Usage
+#### Installation
 
-Run the script directly with Ruby:
+The tool is written in Ruby and requires no external dependencies. Make sure you have Ruby installed on your system.
+
+#### Basic Usage
+
+Generate a simple thread profile:
 ```bash
-ruby scripts/f360-thread-calculator.rb
+ruby bin/generate-threads --angle 60 --pitch 1.25 --diameter 10 --external
 ```
 
-The script will prompt you for:
-1. **Pitch in mm**: Thread pitch (e.g., 1.5 for M10x1.5)
-2. **Internal/External**: Thread gender - type `internal` for nuts or `external` for screws
-3. **Diameter**: The measured diameter from your calipers
+Generate an internal thread with custom offsets:
+```bash
+ruby bin/generate-threads --angle 60 --pitch 1.5 --diameter 12 --internal --offsets 0.0,0.1,0.2
+```
 
-The script outputs calculated thread parameters (major/minor/pitch diameters) with multiple offset classes (0.1, 0.2, 0.3, 0.4mm) that you can use in Fusion 360 thread profiles.
+Use TPI instead of pitch:
+```bash
+ruby bin/generate-threads --angle 55 --tpi 20 --diameter 8 --external
+```
+
+#### Command Line Options
+
+- `--angle ANGLE`: Thread angle in degrees (60° for metric, 55° for Whitworth)
+- `--pitch PITCH`: Pitch in mm (mutually exclusive with --tpi)
+- `--tpi TPI`: Threads per inch (mutually exclusive with --pitch)
+- `--diameter DIA`: Nominal diameter in mm
+- `--internal` or `--external`: Thread gender
+- `--offsets LIST`: Comma-separated offsets in mm (default: 0.0,0.1,0.2,0.3,0.4)
+- `--xml-comment 'some comment'`: Add a comment to the xml
+- `--xml PATH`: Output XML file path (optional)
+- `--name NAME`: Custom name for the thread profile
+- `--dry-run`: Preview output without writing files
+
+#### Example Output
+
+The tool generates XML like this:
+```xml
+<ThreadType>
+  <Name>Generated Threads</Name>
+  <Unit>mm</Unit>
+  <Angle>60.0</Angle>
+  <ThreadSize>
+    <Size>10.00</Size>
+    <Designation>
+      <ThreadDesignation>10.00x1.25</ThreadDesignation>
+      <Pitch>1.25</Pitch>
+      <Thread>
+        <Gender>external</Gender>
+        <Class>O.0</Class>
+        <MajorDia>10.00</MajorDia>
+        <PitchDia>9.19</PitchDia>
+        <MinorDia>8.47</MinorDia>
+      </Thread>
+    </Designation>
+  </ThreadSize>
+</ThreadType>
+```
+
+This XML can be saved directly to your ThreadKeeper directory and will work with Fusion 360.

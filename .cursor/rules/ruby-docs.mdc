@@ -1,0 +1,43 @@
+---
+description: Require YARD documentation for public Ruby APIs; coverage, tag usage, and examples
+globs: *.rb
+alwaysApply: false
+---
+
+### YARD documentation requirements (Ruby)
+
+- Document all public classes/modules and public methods with YARD.
+- Private/protected APIs: document when non-trivial or when behavior is subtle.
+- Complex code and business logic should be commented with clear rationale (see `ruby-style`).
+
+#### Minimum tags per public method
+
+- `@param` for each parameter with type and concise description
+- `@return` with type and meaning
+- `@raise` for any non-standard errors that can be raised
+- Add `@example` when behavior isn’t obvious or has edge cases
+
+#### Recommended tag/style conventions
+
+- One-line summary in imperative mood, then a blank line, then tags.
+- Prefer concrete types (Ruby 2.5-compatible): `String`, `Integer`, `Float`, `Symbol`,
+  `Array<String>`, `Hash{Symbol=>String}`, `IO`, `Logger`.
+- Use `@option` for options hashes; document required vs optional keys.
+- Use `@deprecated` when applicable and point to alternatives.
+- Keep lines ≲100 columns (see `ruby-style`).
+
+#### Example
+
+```ruby
+# Formats a designation string like "10.00x1.25" for a given calculator state.
+#
+# @param calculator [Fusion360::ThreadCalculator] initialized calculator
+# @param include_units [Boolean] whether to append units like "mm"
+# @return [String] formatted designation
+# @raise [GenerateThreads::ValidationError] when calculator is not configured
+# @example
+#   format_designation(calc, true) #=> "10.00x1.25 mm"
+# def format_designation(calculator, include_units = false)
+#   # ...
+# end
+```

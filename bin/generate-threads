@@ -1,0 +1,100 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'optparse'
+require 'logger'
+require_relative '../lib/generate_threads'
+
+def build_logger(verbose_count, quiet_count)
+  # INFO +/- verbosity, clamped to [DEBUG, ERROR]
+  level = Logger::INFO
+  level -= verbose_count.to_i
+  level += quiet_count.to_i
+  level = Logger::DEBUG if level <= Logger::DEBUG
+  level = Logger::ERROR if level >= Logger::ERROR
+  logger = Logger.new($stderr)
+  logger.level = level
+  logger
+end
+
+if __FILE__ == $PROGRAM_NAME
+  exit_codes = GenerateThreads::ExitCodes
+
+  options = {
+    offsets: [0.0, 0.1, 0.2, 0.3, 0.4],
+    sort_order: 3,
+    verbose_count: 0,
+    quiet_count: 0,
+    dry_run: false,
+    xml_comment: nil
+  }
+
+  parser = OptionParser.new do |opts|
+    opts.banner = 'Usage: generate-threads [options]'
+
+    opts.on('--angle ANGLE', Float, 'Thread angle (degrees)') { |v| options[:angle] = v }
+    opts.on('--pitch PITCH', Float, 'Pitch in mm') { |v| options[:pitch] = v }
+    opts.on('--tpi TPI', Float, 'Threads per inch') { |v| options[:tpi] = v }
+    opts.on('--diameter DIA', Float, 'Diameter in mm') { |v| options[:diameter] = v }
+    opts.on('--internal', 'Internal thread') { options[:gender] = :internal }
+    opts.on('--external', 'External thread') { options[:gender] = :external }
+    opts.on('--offsets LIST', 'Comma-separated offsets in mm') do |v|
+      options[:offsets] = v.split(',').map(&:strip).reject(&:empty?).map(&:to_f)
+    end
+    opts.on('--xml PATH', 'Existing XML to merge into or new file to create') { |v| options[:xml] = v }
+    opts.on('--name NAME', 'Root <Name> when creating new file') { |v| options[:name] = v }
+    opts.on('--custom-name NAME', 'Root <CustomName> when creating new file') { |v| options[:custom_name] = v }
+    opts.on('--sort-order N', Integer, 'Root <SortOrder> when creating new file') { |v| options[:sort_order] = v }
+    opts.on('--xml-comment STRING', 'XML comment to insert in newly created ThreadSize elements') { |v| options[:xml_comment] = v }
+    opts.on('--verbose', 'Increase log verbosity') { options[:verbose_count] += 1 }
+    opts.on('--quiet', 'Decrease log verbosity') { options[:quiet_count] += 1 }
+    opts.on('--dry-run', 'Do not write files; print actions and XML to STDOUT') { options[:dry_run] = true }
+    opts.on('-h', '--help', 'Show this help') do
+      puts opts
+      exit 0
+    end
+  end
+
+  begin
+    parser.parse!(ARGV)
+  rescue OptionParser::ParseError => e
+    $stderr.puts("Error: #{e.message}. Use --help for usage.")
+    exit exit_codes::USAGE
+  end
+
+  logger = build_logger(options[:verbose_count], options[:quiet_count])
+
+  begin
+    app = GenerateThreads::App.new(logger: logger)
+    result_xml = app.run(options)
+    if options[:xml]
+      if options[:dry_run]
+        puts result_xml
+      else
+        # When merging or creating with --xml, write in-place
+        File.write(options[:xml], result_xml)
+      end
+    else
+      puts result_xml
+    end
+    exit 0
+  rescue GenerateThreads::ConfigurationError => e
+    logger.error(e.message)
+    exit exit_codes::USAGE
+  rescue GenerateThreads::ValidationError => e
+    logger.error(e.message)
+    exit exit_codes::DATA
+  rescue GenerateThreads::AngleMismatchError => e
+    logger.error(e.message)
+    exit exit_codes::ANGLE_MISMATCH
+  rescue GenerateThreads::XmlParseError => e
+    logger.error(e.message)
+    exit exit_codes::XML_PARSE
+  rescue GenerateThreads::IoError => e
+    logger.error(e.message)
+    exit exit_codes::IO
+  end
+end
+
+

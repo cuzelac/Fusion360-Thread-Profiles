@@ -23,11 +23,11 @@
         <TapDrill>19</TapDrill>
       </Thread>
       <!--<Thread>-->
-        <!--<Gender>external</Gender>-->
-        <!--<Class>O.0</Class>-->
-        <!--<MajorDia>7.75</MajorDia>-->
-        <!--<PitchDia>5.8</PitchDia>-->
-        <!--<MinorDia>4.2</MinorDia>-->
+      <!--<Gender>external</Gender>-->
+      <!--<Class>O.0</Class>-->
+      <!--<MajorDia>7.75</MajorDia>-->
+      <!--<PitchDia>5.8</PitchDia>-->
+      <!--<MinorDia>4.2</MinorDia>-->
       <!--</Thread>-->
     </Designation>
   </ThreadSize>
@@ -79,9 +79,7 @@
         <MinorDia>9.45</MinorDia>
         <TapDrill>9.45</TapDrill>
       </Thread>
-
     </Designation>
-
     <Designation>
       <ThreadDesignation>9.45x0.85</ThreadDesignation>
       <CTD>9.45x0.85</CTD>
@@ -118,13 +116,62 @@
         <MinorDia>9.75</MinorDia>
         <TapDrill>9.75</TapDrill>
       </Thread>
-    <Thread>
+      <Thread>
         <Gender>internal</Gender>
         <Class>O.4</Class>
         <MajorDia>10.77</MajorDia>
         <PitchDia>10.22</PitchDia>
         <MinorDia>9.85</MinorDia>
         <TapDrill>9.85</TapDrill>
+      </Thread>
+    </Designation>
+  </ThreadSize>
+  <ThreadSize>
+    <!--nut for car phone magsafe holder-->
+    <Size>22.62</Size>
+    <Designation>
+      <ThreadDesignation>22.62x1.50</ThreadDesignation>
+      <CTD>22.62x1.50</CTD>
+      <Pitch>1.50</Pitch>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.0</Class>
+        <MajorDia>22.62</MajorDia>
+        <PitchDia>21.65</PitchDia>
+        <MinorDia>21.00</MinorDia>
+        <TapDrill>21.00</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.1</Class>
+        <MajorDia>22.72</MajorDia>
+        <PitchDia>21.74</PitchDia>
+        <MinorDia>21.10</MinorDia>
+        <TapDrill>21.10</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.2</Class>
+        <MajorDia>22.82</MajorDia>
+        <PitchDia>21.85</PitchDia>
+        <MinorDia>21.20</MinorDia>
+        <TapDrill>21.20</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.3</Class>
+        <MajorDia>22.92</MajorDia>
+        <PitchDia>21.95</PitchDia>
+        <MinorDia>21.30</MinorDia>
+        <TapDrill>21.30</TapDrill>
+      </Thread>
+      <Thread>
+        <Gender>internal</Gender>
+        <Class>O.4</Class>
+        <MajorDia>23.02</MajorDia>
+        <PitchDia>22.05</PitchDia>
+        <MinorDia>21.40</MinorDia>
+        <TapDrill>21.40</TapDrill>
       </Thread>
     </Designation>
   </ThreadSize>

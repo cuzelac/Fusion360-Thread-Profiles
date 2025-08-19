@@ -1,0 +1,42 @@
+---
+description: Ruby version policy for portable CLI utilities; target Ruby 2.5 compatibility to maximize out‑of‑the‑box support on modern systems without requiring an upgrade.
+globs: *.rb
+alwaysApply: false
+---
+
+### Ruby version policy (CLI portability first)
+
+- **Target baseline**: Ruby 2.5 compatible code.
+  - Maximizes out‑of‑the‑box compatibility across common "modern" OS installs (older macOS still ship 2.6.x but many LTS Linux releases include 2.5/2.6).
+  - Code should run on Ruby 2.5 without shims or version managers.
+
+- **Do not depend on features newer than 2.5**. Avoid:
+  - Ruby 2.6+: `Kernel#then`, `Enumerator::Chain`, endless ranges (`(1..)`)
+  - Ruby 2.7+: pattern matching (`case ... in`), numbered block params (`_1`), `Enumerable#filter_map`
+  - Ruby 3.x: endless method definitions, changes to keyword arguments semantics (implicit hash not treated as keywords)
+
+- **Stdlib only for the CLI**: Prefer built‑in libraries available in 2.5 (e.g., `logger`, `rexml`, `stringio`). Do not require external gems for the core executable behavior.
+
+- **Shebang**: Use env‑based shebang for portability.
+  - `#!/usr/bin/env ruby`
+
+- **Keyword arguments**: Keep compatibility with 2.5/2.6 behavior.
+  - Prefer explicit hash options or fully spelled keyword args to avoid Ruby 3 keyword separation issues.
+
+- **Syntax choices for 2.5**:
+  - Allowed: safe navigation `&.` (introduced in 2.3)
+  - Prefer explicit block params (`|x|`) over numbered params
+  - Avoid endless method definitions and pattern matching
+
+- **Testing**:
+  - Tests should run under Ruby 2.5. If a newer test helper is required, provide a conditional fallback.
+
+- **Version files/manifests**:
+  - Do not add a `.ruby-version` or any constraint that forces users onto a newer Ruby by default.
+  - If you must raise the baseline, document the rationale in this rule and keep the version bump minimal (next widely available LTS version).
+
+- **Runtime guard (only if truly needed)**:
+  - If a future change requires >2.5, add a small runtime check with a clear error message and exit; otherwise, omit version guards.
+
+- **CI suggestion**: Include a job that runs `ruby -v` and executes the CLI under Ruby 2.5 to ensure ongoing compatibility.
+
